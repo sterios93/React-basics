@@ -1,0 +1,54 @@
+Components
+1. Functional Components
+- a component is just a function which returns some JSX
+Components are the core building block of React apps. Actually, React really is just a library for creating components in its core.
+
+A typical React app therefore could be depicted as a component tree - having one root component ("App") and then an potentially infinite amount of nested child components.
+
+Each component needs to return/ render some JSX code - it defines which HTML code React should render to the real DOM in the end.
+
+JSX is NOT HTML but it looks a lot like it. Differences can be seen when looking closely though (for example className in JSX vs class in "normal HTML"). JSX is just syntactic sugar for JavaScript, allowing you to write HTMLish code instead of nested React.createElement(...) calls.
+
+When creating components, you have the choice between two different ways:
+
+Functional components (also referred to as "presentational", "dumb" or "stateless" components - more about this later in the course) => const cmp = () => { return <div>some JSX</div> } (using ES6 arrow functions as shown here is recommended but optional)
+class-based components (also referred to as "containers", "smart" or "stateful" components) => class Cmp extends Component { render () { return <div>some JSX</div> } } 
+
+
+- you can pass any arguments to a component, and access it later whith props or this.props calls
+- you can pass any elements between the opnening and closing tag of a component and access it later with this.children or children calls
+
+Component Lifecycle
+- Only available in class based components
+
+Component Lifecycle - Creation
+1. constructor(props) - don't cause side effects in the constructor
+ - side effects - sedning a HTTP request, store something in the local storage of the browser - it can impact performance
+2. getDerivedStateFromProps(props, state) - don't cause side effects
+- whenever a prop is changed for the class based component, you can sync your state to them - Rare cases !
+3. render() - Prepare and Structure your JSC code
+4. render child components 
+5. componentDidMount() - here you can cause side effects !! Call setState only after a promise response.
+
+Component Lifecycle - Update
+1. getDerivedStateFromProps(props, state) - Sync state to props, don't cause side effects
+2. shouldComponentUpdate(nextProps, nextState) 
+    - may cancel the updating process (performance optimizations)
+    - don't cause side effects
+3. render()
+4. update child components
+5. getSnapshotBeforeUpdate(prevProps, prevState)
+    - last minute DOM opreations (don't update the dom, for example, getting the current scroll position of the user)
+    - don't cause side effects
+6. componentDidUpdate()
+    - here you can cause side effects
+    - don't update state if it's not a result of some async request (promise), triggers re-render
+
+
+How React updates the DOM
+-> shoudComponentUpdate passed -> render() -> calling render, doesnt immedeatly updates the REAL DOM, instead do some comparison betwen 
+old and re-rendered dom
+-> React keeps two Virtual dom representations 
+1.Old Virtual Dom 
+2.Re-rendered Virtual DOM
+- Virtual DOM is faster than real DOM, because everything is JS

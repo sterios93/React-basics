@@ -48,7 +48,13 @@ Component Lifecycle - Update
 How React updates the DOM
 -> shoudComponentUpdate passed -> render() -> calling render, doesnt immedeatly updates the REAL DOM, instead do some comparison betwen 
 old and re-rendered dom
--> React keeps two Virtual dom representations 
-1.Old Virtual Dom 
+-> React keeps two Virtual dom representations
+1.Old Virtual Dom
 2.Re-rendered Virtual DOM
 - Virtual DOM is faster than real DOM, because everything is JS
+
+
+Higher-Order Components
+- A higher-order component (HOC) is an advanced technique in React for reusing component logic.
+- Concretely, a higher-order component is a function that takes a component and returns a new component.
+- Whereas a component transforms props into UI, a higher-order component transforms a component into another component.
